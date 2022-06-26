@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './index.css';
 import List from './List';
 import Alert from './Alert';
+import './Randombg'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 
 const getLocalStorage = () => {
   let list = localStorage.getItem('list')
@@ -88,7 +90,7 @@ export default function App() {
             <input type="text" className='todo' placeholder='e.g. wash clothes' value={name} onChange={(e) => setName(e.target.value)} />
             <button type='submit' className='submit-btn'>
               {
-                isEditing ? 'edit' : 'submit'
+                isEditing ? <FaEdit /> : '✔️'
               }
             </button>
           </div>
