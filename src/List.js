@@ -1,16 +1,16 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
-// passing todos prop
-// todos = all todo
-// removeTodo = to remove particular todo
-const List = ({ todos, removeTodo, editTodo }) => {
+const List = ({ todos, removeTodo, editTodo, toggleComplete }) => {
     return (
         <div className='todo'>
             {todos.map((todo) => {
-                const { id, title } = todo
-                return <article key={id} className="todo-todo">
-                    <p className='title'>{title}</p>
+                const { id, title, completed } = todo
+                return <article key={id} className={`todo-todo ${completed ? 'completed' : ''}`}>
+                    <div className="left">
+                        <input type="checkbox" className="todo-checkbox" checked={!!completed} onChange={() => toggleComplete(id)} />
+                        <p className='title'>{title}</p>
+                    </div>
 
                     <div className='btn-container'>
                         <button type='button' className='edit-btn' onClick={() => editTodo(id)}><FaEdit/></button>

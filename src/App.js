@@ -3,7 +3,7 @@ import './index.css';
 import List from './List';
 import Alert from './Alert';
 import './Randombg'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa'
 
 const getLocalStorage = () => {
   let list = localStorage.getItem('list')
@@ -21,17 +21,15 @@ export default function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+  const [toast, setToast] = useState({ show: false, msg: '' });
 
-  // will handle submit event
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (!name) {
-      // display alert
       showAlert(true, 'danger', 'please enter proper todo')
     }
     else if (name && isEditing) {
-      // deal with edit
       setList(list.map((todo) => {
         if (todo.id === editId) {
           return { ...todo, title: name }
@@ -45,12 +43,19 @@ export default function App() {
       showAlert(true, 'success', 'todo updated')
     }
     else {
-      // display alert
-      showAlert(true, 'success', 'todo added to list')
-      const newTodo = { id: new Date().getTime().toString(), title: name }
+      const newTodo = { id: new Date().getTime().toString(), title: name, completed: false }
       setList([...list, newTodo])
       setName('')
     }
+  }
+
+  const toggleComplete = (id) => {
+    setList(list.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed }
+      }
+      return todo
+    }))
   }
 
   const showAlert = (show = false, type = '', msg = "") => {
@@ -58,13 +63,15 @@ export default function App() {
   }
 
   const clearList = () => {
-    showAlert(true, 'danger', 'cleared to do list')
     setList([])
+    setToast({ show: true, msg: 'Todo list cleared' })
+    setTimeout(() => setToast({ show: false, msg: '' }), 3000)
   }
 
   const removeTodo = (id) => {
-    showAlert(true, 'danger', 'todo removed')
     setList(list.filter((todo) => todo.id !== id))
+    setToast({ show: true, msg: 'Todo removed' })
+    setTimeout(() => setToast({ show: false, msg: '' }), 3000)
   }
 
   const editTodo = (id) => {
@@ -78,11 +85,12 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list))
 
-  },/*every time list change it will use local storage*/[list])
+  },[list])
 
   return (
     <div className="App">
       <section className="section-center">
+        {toast.show && <div className="toast">{toast.msg}</div>}
         <form action="" className='todo-form' onSubmit={handleSubmit}>
           {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
           <h3>To Do App</h3>
@@ -98,8 +106,7 @@ export default function App() {
 
         {list.length > 0 && (
           <div className='todo-container'>
-            {/* todo prop below */}
-            <List todos={list} removeTodo={removeTodo} editTodo={editTodo} />
+              <List todos={list} removeTodo={removeTodo} editTodo={editTodo} toggleComplete={toggleComplete} />
             <button className='clear-btn' onClick={clearList}>clear todo list</button>
           </div>
         )}
