@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect fill="#a8e6ff" width="1200" height="800"/>
+  <g id="sun"><circle cx="100" cy="100" r="48" fill="#FFD166"/></g>
+  <g id="rainbow" transform="translate(600,180)">
+    <path d="M-380,160 C-320,20 -200,20 -120,160" stroke="#FFB4A2" stroke-width="22" fill="none" stroke-linecap="round"/>
+    <path d="M-360,170 C-310,50 -190,50 -140,170" stroke="#FFD166" stroke-width="18" fill="none" stroke-linecap="round"/>
+  </g>
+  <g id="clouds" fill="#ffffff">
+    <ellipse cx="900" cy="120" rx="70" ry="40"/>
+    <ellipse cx="960" cy="140" rx="50" ry="30"/>
+    <ellipse cx="840" cy="140" rx="60" ry="35"/>
+    <ellipse cx="300" cy="140" rx="80" ry="45"/>
+    <ellipse cx="360" cy="160" rx="60" ry="35"/>
+  </g>
+  <g id="balloons" transform="translate(150,260)">
+    <g><circle cx="40" cy="0" r="28" fill="#FF6B6B"/><path d="M40 28 L40 68" stroke="#9b312b" stroke-width="2"/></g>
+    <g transform="translate(120,20)"><circle cx="40" cy="0" r="30" fill="#4D96FF"/><path d="M40 30 L40 80" stroke="#2a4f7a" stroke-width="2"/></g>
+    <g transform="translate(240,10)"><circle cx="40" cy="0" r="26" fill="#FFD166"/><path d="M40 26 L40 64" stroke="#b38b2b" stroke-width="2"/></g>
+  </g>
+  <g id="confetti">
+    <rect x="520" y="420" width="8" height="20" fill="#8AE993" transform="rotate(15 524 430)"/>
+    <rect x="640" y="360" width="8" height="16" fill="#FF6B6B" transform="rotate(-25 644 368)"/>
+    <rect x="760" y="480" width="8" height="18" fill="#4D96FF" transform="rotate(8 764 489)"/>
+  </g>
+</svg>
